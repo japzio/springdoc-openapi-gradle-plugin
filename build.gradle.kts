@@ -8,7 +8,7 @@ plugins {
 	id("io.gitlab.arturbosch.detekt") version "1.23.1"
 }
 
-group = "org.springdoc"
+group = "org.japzio"
 version = "1.8.1"
 
 sonarqube {
@@ -74,9 +74,9 @@ gradlePlugin {
 	vcsUrl = "https://github.com/springdoc/springdoc-openapi-gradle-plugin.git"
 	plugins {
 		create("springdoc-gradle-plugin") {
-			id = "org.springdoc.openapi-gradle-plugin"
-			displayName = "A Gradle plugin for the springdoc-openapi library"
-			description = " This plugin uses springdoc-openapi to generate an OpenAPI description at build time"
+			id = "org.japzio.openapi-gradle-plugin"
+			displayName = "A Gradle plugin for the springdoc-openapi library - from org.springdoc.openapi-gradle-plugin Unmerged Branch"
+			description = " This plugin uses springdoc-openapi to generate an OpenAPI description at build time - Unmerged Branch (1.8.0)"
 			implementationClass = "org.springdoc.openapi.gradle.plugin.OpenApiGradlePlugin"
 			tags = listOf("springdoc", "openapi", "swagger")
 		}
