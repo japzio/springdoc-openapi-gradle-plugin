@@ -71,7 +71,7 @@ dependencies {
 
 gradlePlugin {
 	website = "https://github.com/springdoc/springdoc-openapi-gradle-plugin"
-	vcsUrl = "https://github.com/springdoc/springdoc-openapi-gradle-plugin.git"
+	vcsUrl = "https://github.com/japzio/springdoc-openapi-gradle-plugin"
 	plugins {
 		create("springdoc-gradle-plugin") {
 			id = "org.japzio.openapi-gradle-plugin"
