@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "org.japzio"
-version = "1.8.1"
+version = "1.8.2"
 
 sonarqube {
 	properties {
