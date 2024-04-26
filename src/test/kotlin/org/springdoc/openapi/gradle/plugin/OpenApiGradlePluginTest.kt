@@ -35,7 +35,7 @@ class OpenApiGradlePluginTest {
             id 'java'
             id 'org.springframework.boot' version '2.7.6'
             id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-            id 'org.springdoc.openapi-gradle-plugin'
+            id 'org.japzio.openapi-gradle-plugin'
         }
         
         group = 'com.example'
