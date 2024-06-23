@@ -25,8 +25,8 @@ Gradle Groovy DSL
 
 ```groovy
 plugins {
-      id "org.springframework.boot" version "2.7.0"
-      id "org.springdoc.openapi-gradle-plugin" version "1.8.0"
+    id "org.springframework.boot" version "2.7.0"
+    id "org.springdoc.openapi-gradle-plugin" version "1.9.0"
 }
 ```
 
@@ -35,7 +35,7 @@ Gradle Kotlin DSL
 ```groovy
 plugins {
     id("org.springframework.boot") version "2.7.0"
-    id("org.springdoc.openapi-gradle-plugin") version "1.8.0"
+    id("org.springdoc.openapi-gradle-plugin") version "1.9.0"
 }
 ```
 
@@ -56,7 +56,7 @@ Running the task `generateOpenApiDocs` writes the OpenAPI spec into a `openapi.j
 in your project's build dir.
 
 ```bash
-gradle clean generateOpenApiDocs
+gradle generateOpenApiDocs
 ``` 
 
 When you run the gradle task **generateOpenApiDocs**, it starts your spring boot
@@ -73,6 +73,7 @@ openApi as follows
 
 ```kotlin
 openApi {
+<<<<<<< HEAD
     apiDocsUrl.set("https://localhost:9000/api/docs")
     outputDir.set(file("$buildDir/docs"))
     outputFileName.set("swagger.json")
@@ -87,6 +88,25 @@ openApi {
        "x-forwarded-host": "custom-host",
        "x-forwarded-port": "7000"
     ]
+=======
+	apiDocsUrl.set("https://localhost:9000/api/docs")
+	outputDir.set(file("$buildDir/docs"))
+	outputFileName.set("swagger.json")
+	waitTimeInSeconds.set(10)
+	trustStore.set("keystore/truststore.p12")
+	trustStorePassword.set("changeit".toCharArray())
+	groupedApiMappings.set(
+		["https://localhost:8080/v3/api-docs/groupA" to "swagger-groupA.json",
+			"https://localhost:8080/v3/api-docs/groupB" to "swagger-groupB.json"]
+	)
+	customBootRun {
+		args.set(["--spring.profiles.active=special"])
+	}
+	requestHeaders = [
+		"x-forwarded-host": "custom-host",
+	"x-forwarded-port": "7000"
+	]
+>>>>>>> 8c9d58637c2c00af92066dd2eaa044495b443ff1
 }
 ```
 
@@ -96,10 +116,11 @@ openApi {
 | `outputDir`          | The output directory for the generated OpenAPI file                                                                        | No       | $buildDir - Your project's build dir |
 | `outputFileName`     | Specifies the output file name.                                                                                            | No       | openapi.json                         |
 | `waitTimeInSeconds`  | Time to wait in seconds for your Spring Boot application to start, before we make calls to `apiDocsUrl` to download the OpenAPI doc | No       | 30 seconds                           |
-| `groupedApiMappings` | A map of URLs (from where the OpenAPI docs can be downloaded) to output file names                                         | No       | []                                   |
-| `customBootRun`      | Any bootRun property that you would normal need to start your spring boot application.                                     | No       | (N/A)                                |
+| `trustStore`         | Path to a trust store that contains custom trusted certificates.                                                                    | No       | `<None>`                             |
+| `trustStorePassword` | Password to open Trust Store                                                                                                        | No       | `<None>`                             |
+| `groupedApiMappings` | A map of URLs (from where the OpenAPI docs can be downloaded) to output file names                                                  | No       | []                                   |
+| `customBootRun`      | Any bootRun property that you would normal need to start your spring boot application.                                              | No       | (N/A)                                |
 | `requestHeaders`     | customize Generated server url, relies on `server.forward-headers-strategy=framework`                                      | No       | (N/A)                                |
-
 
 ### `customBootRun` properties examples
 
@@ -128,7 +149,7 @@ openApi {
 
 This allows for you to be able to just send in whatever you need when you generate docs.
 
-`./gradlew clean generateOpenApiDocs -Dspring.profiles.active=special`
+`./gradlew generateOpenApiDocs -Dspring.profiles.active=special`
 
 and as long as the config looks as follows that value will be passed into the forked
 spring boot application.
@@ -139,6 +160,20 @@ openApi {
          systemProperties = System.properties
     }
 }
+```
+
+### Trust Store Configuration
+
+If you have restricted your application to HTTPS only and prefer not to include your certificate
+in Java's cacerts file, you can configure your own set of trusted certificates through plugin
+properties, ensuring SSL connections are established.
+
+#### Generating a Trust Store
+
+To create your own Trust Store, utilize the Java keytool command:
+
+```shell
+keytool -storepass changeit -noprompt -import -alias ca -file [CERT_PATH]/ca.crt -keystore [KEYSTORE_PATH]/truststore.p12 -deststoretype PKCS12
 ```
 
 ### Grouped API Mappings Notes
