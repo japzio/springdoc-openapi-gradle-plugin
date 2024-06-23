@@ -73,22 +73,6 @@ openApi as follows
 
 ```kotlin
 openApi {
-<<<<<<< HEAD
-    apiDocsUrl.set("https://localhost:9000/api/docs")
-    outputDir.set(file("$buildDir/docs"))
-    outputFileName.set("swagger.json")
-    waitTimeInSeconds.set(10)
-    groupedApiMappings.set(["https://localhost:8080/v3/api-docs/groupA" to "swagger-groupA.json",
-                            "https://localhost:8080/v3/api-docs/groupB" to "swagger-groupB.json"])
-    customBootRun {
-        args.set(["--spring.profiles.active=special"]) 
-    }
-    
-    requestHeaders = [
-       "x-forwarded-host": "custom-host",
-       "x-forwarded-port": "7000"
-    ]
-=======
 	apiDocsUrl.set("https://localhost:9000/api/docs")
 	outputDir.set(file("$buildDir/docs"))
 	outputFileName.set("swagger.json")
@@ -105,8 +89,7 @@ openApi {
 	requestHeaders = [
 		"x-forwarded-host": "custom-host",
 	"x-forwarded-port": "7000"
-	]
->>>>>>> 8c9d58637c2c00af92066dd2eaa044495b443ff1
+ ]
 }
 ```
 
