@@ -73,6 +73,22 @@ openApi as follows
 
 ```kotlin
 openApi {
+<<<<<<< HEAD
+    apiDocsUrl.set("https://localhost:9000/api/docs")
+    outputDir.set(file("$buildDir/docs"))
+    outputFileName.set("swagger.json")
+    waitTimeInSeconds.set(10)
+    groupedApiMappings.set(["https://localhost:8080/v3/api-docs/groupA" to "swagger-groupA.json",
+                            "https://localhost:8080/v3/api-docs/groupB" to "swagger-groupB.json"])
+    customBootRun {
+        args.set(["--spring.profiles.active=special"]) 
+    }
+    
+    requestHeaders = [
+       "x-forwarded-host": "custom-host",
+       "x-forwarded-port": "7000"
+    ]
+=======
 	apiDocsUrl.set("https://localhost:9000/api/docs")
 	outputDir.set(file("$buildDir/docs"))
 	outputFileName.set("swagger.json")
@@ -90,14 +106,15 @@ openApi {
 		"x-forwarded-host": "custom-host",
 	"x-forwarded-port": "7000"
 	]
+>>>>>>> 8c9d58637c2c00af92066dd2eaa044495b443ff1
 }
 ```
 
-| Parameter            | Description                                                                                                                         | Required | Default                              |
-|----------------------|-------------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------------|
-| `apiDocsUrl`         | The URL from where the OpenAPI doc can be downloaded. If the url ends with `.yaml`, output will YAML format.                                                                                 | No       | http://localhost:8080/v3/api-docs    |
-| `outputDir`          | The output directory for the generated OpenAPI file                                                                                 | No       | $buildDir - Your project's build dir |
-| `outputFileName`     | Specifies the output file name.                            | No       | openapi.json                         |
+| Parameter            | Description                                                                                                                | Required | Default                              |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------------|
+| `apiDocsUrl`         | The URL from where the OpenAPI doc can be downloaded. If the url ends with `.yaml`, output will YAML format.               | No       | http://localhost:8080/v3/api-docs    |
+| `outputDir`          | The output directory for the generated OpenAPI file                                                                        | No       | $buildDir - Your project's build dir |
+| `outputFileName`     | Specifies the output file name.                                                                                            | No       | openapi.json                         |
 | `waitTimeInSeconds`  | Time to wait in seconds for your Spring Boot application to start, before we make calls to `apiDocsUrl` to download the OpenAPI doc | No       | 30 seconds                           |
 | `trustStore`         | Path to a trust store that contains custom trusted certificates.                                                                    | No       | `<None>`                             |
 | `trustStorePassword` | Password to open Trust Store                                                                                                        | No       | `<None>`                             |

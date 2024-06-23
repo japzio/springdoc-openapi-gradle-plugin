@@ -440,7 +440,7 @@ class OpenApiGradlePluginTest {
 		assertEquals(TaskOutcome.SUCCESS, openApiDocsTask(runTheBuild()).outcome)
 		assertOpenApiJsonFile(2)
 	}
-
+	
 	private fun runTheBuild(vararg additionalArguments: String = emptyArray()) =
 		GradleRunner.create()
 			.withProjectDir(projectTestDir)
